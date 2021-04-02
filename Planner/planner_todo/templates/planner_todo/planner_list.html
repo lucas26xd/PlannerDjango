@@ -1,0 +1,55 @@
+{% extends "planner_todo/base.html" %}
+
+{% block style %}
+{% endblock style %}
+
+{% block notes %}
+
+{% endblock notes %}
+
+{% block todo %}
+    <table class="table table-borderless text-white">
+        <tbody>
+            {% for todo in ToDo %}
+                <tr>
+                    <td>
+                        <form action="" method="post" autocomplete="off" class="form-inline row">
+                            {% csrf_token %}
+                            <input type="hidden" name="id" value="{{ todo.id }}">
+                            <div class="mr-1">
+                                <input name="finished" type="checkbox" title="Reativar Tarefa" onChange="this.form.submit()"
+                                {% if todo.finished %} checked {% endif %}>
+                            </div>
+                            <div class="">
+                                <input type="text" name="title" readonly value="{{ todo.title }}" title="Última atualização em {{ todo.updated }}" class="form-control-plaintext text-white"
+                                {% if todo.finished %} style="text-decoration: line-through;" {% endif %}>
+                            </div>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+            <tr>
+                <td>
+                    <form id="formNewToDo" action="" method="post" autocomplete="off" class="form-inline row">
+                        {% csrf_token %}
+                        <input name="finished" type="checkbox" title="Tarefa concluída?">
+                        <input id="newToDo" name="title" type="text" placeholder="Nova tarefa...">
+                    </form>
+                    </td>
+                </tr>
+        </tbody>
+    </table>
+{% endblock todo %}
+
+{% block script %}
+    $('.form-control-plaintext').dblclick((evt) => {
+        evt.target.removeAttribute('readonly')
+        evt.target.classList.remove('text-white')
+        evt.target.style.color = '#e6ca65'
+    })
+
+    $('.form-control-plaintext').focusout((evt) => {
+        evt.target.setAttribute('readonly', true)
+        evt.target.classList.add('text-white')
+    })
+{% endblock script %}

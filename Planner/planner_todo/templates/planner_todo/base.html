@@ -1,0 +1,67 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="author" content="Lucas Santos">
+    <meta name="generator" content="Pycharm">
+    <meta name="description" content="Planner">
+    <meta name="keywords" content="Planner, Tarefas, To Do, Calendário, Atividades">
+    <title>{% block title %}Seu Planner{% endblock title %}</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+    <link rel="icon" type="image/x-icon" class="favicon" href="https://cdn.iconscout.com/icon/free/png-512/planner-2-461732.png">
+    <style>
+        {% block style %}
+        {% endblock style %}
+    </style>
+</head>
+<body>
+    <div class="container-fluid text-center">
+        <h1 class="display-3">Trace seus planos e metas diárias</h1>
+        <div class="row">
+            <div class="col-xl-9 offset--md-1 mt-5">
+                <div class="jumbotron text-center">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <button class="btn btn-block btn-lg">
+                                <i class="fas fa-chevron-left display-4"></i>
+                            </button>
+                        </div>
+                        <div class="col-md-8">
+                            <h1 class="display-4">{{ month_year }}</h1>
+                        </div>
+                        <div class="col-md-2">
+                            <button class="btn btn-block btn-lg">
+                                <i class="fas fa-chevron-right display-4"></i>
+                            </button>
+                        </div>
+                    </div>
+                  <hr class="my-4">
+                    {% block notes %}
+                    {% endblock notes %}
+                </div>
+            </div>
+            <div class="col-xl-3 offset--md-1 mt-5" style="overflow-y: auto; height:800px;">
+                <div class="jumbotron bg-dark text-white">
+                  <h1 class="display-4 text-center">Tarefas</h1>
+                  <hr class="my-4">
+                    {% block todo %}
+                    {% endblock todo %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script>
+        {% block script %}
+        {% endblock script %}
+    </script>
+</body>
+</html>
