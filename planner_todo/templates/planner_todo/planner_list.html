@@ -1,11 +1,36 @@
 {% extends "planner_todo/base.html" %}
 
 {% block style %}
+    .buttonIn {
+        width: 300px;
+        position: relative;
+    }
+
+    input {
+        padding: 0px;
+        outline: none;
+        height: auto;
+        border-radius: 5px;
+    }
+
+    button {
+        position: absolute;
+        top: 0;
+        border-radius: 5px;
+        right: 0px;
+        z-index: 2;
+        border: none;
+        top: 2px;
+        height: 30px;
+        cursor: pointer;
+        transform: translateX(2px);
+    }
+
 {% endblock style %}
 
-{% block notes %}
-
-{% endblock notes %}
+{% block cal %}
+    {{ calendario|safe }}
+{% endblock cal %}
 
 {% block todo %}
     <table class="table table-borderless text-white">
@@ -20,9 +45,10 @@
                                 <input name="finished" type="checkbox" title="Reativar Tarefa" onChange="this.form.submit()"
                                 {% if todo.finished %} checked {% endif %}>
                             </div>
-                            <div class="">
+                            <div class="buttonIn">
                                 <input type="text" name="title" readonly value="{{ todo.title }}" title="Última atualização em {{ todo.updated }}" class="form-control-plaintext text-white"
                                 {% if todo.finished %} style="text-decoration: line-through;" {% endif %}>
+                                <button id="delete" name="delete"><i class="far fa-trash-alt text-danger"></i></button>
                             </div>
                         </form>
                     </td>
@@ -32,7 +58,7 @@
                 <td>
                     <form id="formNewToDo" action="" method="post" autocomplete="off" class="form-inline row">
                         {% csrf_token %}
-                        <input name="finished" type="checkbox" title="Tarefa concluída?">
+                        <input name="finished" type="checkbox" title="Tarefa concluída?" class="mr-2">
                         <input id="newToDo" name="title" type="text" placeholder="Nova tarefa...">
                     </form>
                     </td>
@@ -49,7 +75,8 @@
     })
 
     $('.form-control-plaintext').focusout((evt) => {
-        evt.target.setAttribute('readonly', true)
-        evt.target.classList.add('text-white')
+        //evt.target.setAttribute('readonly', true)
+        //evt.target.classList.add('text-white')
+        evt.target.form.submit()
     })
 {% endblock script %}

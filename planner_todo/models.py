@@ -1,7 +1,7 @@
 from django.db import models
 
 
-class Note(models.Model):  # https://www.youtube.com/watch?v=4EJlrweJE-M
+class Note(models.Model):
     title = models.CharField(max_length=100)
     begin_date = models.DateField(auto_created=True)
     end_date = models.DateField()

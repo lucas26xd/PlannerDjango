@@ -32,7 +32,7 @@
                             </button>
                         </div>
                         <div class="col-md-8">
-                            <h1 class="display-4">{{ month_year }}</h1>
+                            <h1 class="display-4">{{ month }} de {{ year }}</h1>
                         </div>
                         <div class="col-md-2">
                             <button class="btn btn-block btn-lg">
@@ -41,8 +41,10 @@
                         </div>
                     </div>
                   <hr class="my-4">
-                    {% block notes %}
-                    {% endblock notes %}
+                    <center class="display-5">
+                        {% block cal %}
+                        {% endblock cal %}
+                    </center>
                 </div>
             </div>
             <div class="col-xl-3 offset--md-1 mt-5" style="overflow-y: auto; height:800px;">
