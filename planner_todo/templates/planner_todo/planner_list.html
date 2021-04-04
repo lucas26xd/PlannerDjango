@@ -6,14 +6,19 @@
         position: relative;
     }
 
-    input {
+    input[type="text"] {
         padding: 0px;
         outline: none;
         height: auto;
         border-radius: 5px;
     }
 
-    button {
+    input[type="checkbox"] {
+        height: 20px;
+        width: 20px;
+    }
+
+    .delete {
         position: absolute;
         top: 0;
         border-radius: 5px;
@@ -29,7 +34,32 @@
 {% endblock style %}
 
 {% block cal %}
-    {{ calendario|safe }}
+    <table class="table h1">
+        <thead>
+            <tr>
+              <th scope="col">Dom</th>
+              <th scope="col">Seg</th>
+              <th scope="col">Ter</th>
+              <th scope="col">Qua</th>
+              <th scope="col">Qui</th>
+              <th scope="col">Sex</th>
+              <th scope="col">Sab</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for week in calendario %}
+                <tr>
+                    {% for day in week %}
+                        <td {% if week.0 == day %} scope="row" {% endif %}>
+                            {% if day != 0 %}
+                            <a href="#" data-toggle="modal" data-target="#modalNote"> {{ day }} </a>
+                            {% endif %}
+                        </td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 {% endblock cal %}
 
 {% block todo %}
@@ -42,13 +72,14 @@
                             {% csrf_token %}
                             <input type="hidden" name="id" value="{{ todo.id }}">
                             <div class="mr-1">
-                                <input name="finished" type="checkbox" title="Reativar Tarefa" onChange="this.form.submit()"
-                                {% if todo.finished %} checked {% endif %}>
+                                <input name="finished" type="checkbox" onChange="this.form.submit()"
+                                       title="{% if todo.finished %}Reativar{% else %}Concluir{% endif %} tarefa"
+                                       {% if todo.finished %} checked {% endif %}>
                             </div>
                             <div class="buttonIn">
                                 <input type="text" name="title" readonly value="{{ todo.title }}" title="Última atualização em {{ todo.updated }}" class="form-control-plaintext text-white"
                                 {% if todo.finished %} style="text-decoration: line-through;" {% endif %}>
-                                <button id="delete" name="delete"><i class="far fa-trash-alt text-danger"></i></button>
+                                <button id="delete" name="delete" class="delete"><i class="far fa-trash-alt text-danger"></i></button>
                             </div>
                         </form>
                     </td>

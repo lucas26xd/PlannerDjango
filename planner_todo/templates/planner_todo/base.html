@@ -25,23 +25,27 @@
         <div class="row">
             <div class="col-xl-9 offset--md-1 mt-5">
                 <div class="jumbotron text-center">
-                    <div class="row">
-                        <div class="col-md-2">
-                            <button class="btn btn-block btn-lg">
-                                <i class="fas fa-chevron-left display-4"></i>
-                            </button>
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="year" value="{{ year }}">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <button class="btn btn-block btn-lg" name="previous" value="{{ month_number }}">
+                                    <i class="fas fa-chevron-left display-4"></i>
+                                </button>
+                            </div>
+                            <div class="col-md-8">
+                                <h1 class="display-4">{{ month }} de {{ year }}</h1>
+                            </div>
+                            <div class="col-md-2">
+                                <button class="btn btn-block btn-lg" name="next" value="{{ month_number }}">
+                                    <i class="fas fa-chevron-right display-4"></i>
+                                </button>
+                            </div>
                         </div>
-                        <div class="col-md-8">
-                            <h1 class="display-4">{{ month }} de {{ year }}</h1>
-                        </div>
-                        <div class="col-md-2">
-                            <button class="btn btn-block btn-lg">
-                                <i class="fas fa-chevron-right display-4"></i>
-                            </button>
-                        </div>
-                    </div>
+                    </form>
                   <hr class="my-4">
-                    <center class="display-5">
+                    <center>
                         {% block cal %}
                         {% endblock cal %}
                     </center>
@@ -57,6 +61,44 @@
             </div>
         </div>
     </div>
+
+    <div id="modalNote" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="Note" aria-hidden="true">
+        <div class="modal-dialog">
+            <form>
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <input type="text" name="title" readonly value="Título da Nota" class="form-control-plaintext h3"
+                                style="text-decoration: line-through;">
+                        <button type="button" class="close font-weight-light" data-dismiss="modal" aria-hidden="true">×</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group row">
+                            <div class="col-sm-6">
+                                <label for="beginDate">Data de início:</label>
+                                <input name="begin_date" type="text" class="form-control" id="beginDate" placeholder="Data de início" required>
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="endDate">Data de fim:</label>
+                                <input name="end_date" type="text" class="form-control" id="endDate" placeholder="Data de fim" required>
+                            </div>
+                            <div class="col-sm-12">
+                                <label for="noteBody">Anotações:</label>
+                                <textarea name="body" rows="6" class="form-control" id="noteBody" placeholder="Anotações"></textarea>
+                            </div>
+                            <div class="col-sm-12">
+                                <p>Última atualização em 01/04/2021.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn" data-dismiss="modal" aria-hidden="true">Fechar</button>
+                        <button class="btn btn-primary">Salvar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
